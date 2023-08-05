@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="centerstage">
+    <h1>Question Detail Page</h2>
+        {% if question %}
+            <h3>{{ question.title}}</h3>
+            <p>{{ question.content }}</p>
+            <p>By: {{ question.user }}</p>
+            <br>
+            <hr>
+            <a href="{% url 'add_like' pk=question.pk %}">Like: {{ question.likes }}</a>
+            <hr>
+            <h4>Answers</h4>
+            <h5>Add Answer</h5>
+            <form method="POST" class="post-form" action="{% url 'add_answer' pk=question.pk%}">
+                {% csrf_token %} {{form.as_p}}
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+            {% if question.answer_set.all %}
+                {% for answer in question.answer_set.all %}
+                    <h6>{{ answer.user }}</h6>
+                    <p>{{ answer.content }}</p>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>No answers yet.</p>
+            {% endif %}
+        {% else %}
+            <p>Something went Wrong</p>
+        {% endif %}
+</div>
+{% endblock %}

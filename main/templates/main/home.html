@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="centerstage">
+    <h1>Quora Home Page</h2>
+        {% if questions %}
+            {% for question in questions %}
+                <a href="{% url 'question_detail' pk=question.pk %}"><h3>{{ question.title }}</h3></a>
+                <p>{{ question.content }}</p>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>No Questions yet.</p>
+        {% endif %}
+</div>
+{% endblock %}
+
