@@ -13,7 +13,7 @@ def add_users(apps, schema_editor):
     user2 = User.objects.create(username="test_user2")
     user2.set_password('password2')
     user2.save()
-    user3 = User.objects.create(username="test_user3", password="password3")
+    user3 = User.objects.create(username="test_user3")
     user3.set_password('password3')
     user3.save()
 
